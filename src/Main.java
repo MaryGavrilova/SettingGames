@@ -31,15 +31,19 @@ public class Main {
         File dir = new File(pathOfFolder);
         if (dir.mkdir()) {
             logger.append("Директория " + pathOfFolder + " создана\n");
-        } else logger.append("Директорию " + pathOfFolder + " создать не получилось\n");
+        } else {
+            logger.append("Директорию " + pathOfFolder + " создать не получилось\n");
+        }
     }
 
     public static void createFile(String pathOfFile, StringBuilder logger) {
         File file = new File(pathOfFile);
         try {
-            if (file.createNewFile())
+            if (file.createNewFile()) {
                 logger.append("Файл " + pathOfFile + " создан\n");
-            else logger.append("Файл " + pathOfFile + " создать не получилось\n");
+            } else {
+                logger.append("Файл " + pathOfFile + " создать не получилось\n");
+            }
         } catch (IOException ex) {
             logger.append(ex.getMessage());
             System.out.println(ex.getMessage());
