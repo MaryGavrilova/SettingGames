@@ -4,50 +4,50 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        createFolder("/Users/gavri/Games/src", stringBuilder);
-        createFolder("/Users/gavri/Games/res", stringBuilder);
-        createFolder("/Users/gavri/Games/savegames", stringBuilder);
-        createFolder("/Users/gavri/Games/temp", stringBuilder);
+        StringBuilder logger = new StringBuilder();
+        createFolder("/Users/gavri/Games/src", logger);
+        createFolder("/Users/gavri/Games/res", logger);
+        createFolder("/Users/gavri/Games/savegames", logger);
+        createFolder("/Users/gavri/Games/temp", logger);
 
-        createFolder("/Users/gavri/Games/src/main", stringBuilder);
-        createFolder("/Users/gavri/Games/src/test", stringBuilder);
+        createFolder("/Users/gavri/Games/src/main", logger);
+        createFolder("/Users/gavri/Games/src/test", logger);
 
-        createFile("/Users/gavri/Games/src/main/Main.java", stringBuilder);
-        createFile("/Users/gavri/Games/src/main/Utils.java", stringBuilder);
+        createFile("/Users/gavri/Games/src/main/Main.java", logger);
+        createFile("/Users/gavri/Games/src/main/Utils.java", logger);
 
-        createFolder("/Users/gavri/Games/res/drawables", stringBuilder);
-        createFolder("/Users/gavri/Games/res/vectors", stringBuilder);
-        createFolder("/Users/gavri/Games/res/icons", stringBuilder);
+        createFolder("/Users/gavri/Games/res/drawables", logger);
+        createFolder("/Users/gavri/Games/res/vectors", logger);
+        createFolder("/Users/gavri/Games/res/icons", logger);
 
-        createFile("/Users/gavri/Games/temp/temp.txt", stringBuilder);
+        createFile("/Users/gavri/Games/temp/temp.txt", logger);
 
-        String logs = stringBuilder.toString();
+        String logs = logger.toString();
         System.out.println(logs);
         writeInfoToFile(logs, "/Users/gavri/Games/temp/temp.txt");
     }
 
-    public static void createFolder(String path, StringBuilder stringBuilder) {
-        File dir = new File(path);
+    public static void createFolder(String pathOfFolder, StringBuilder logger) {
+        File dir = new File(pathOfFolder);
         if (dir.mkdir()) {
-            stringBuilder.append("Директория " + path + " создана\n");
-        } else stringBuilder.append("Директорию " + path + " создать не получилось\n");
+            logger.append("Директория " + pathOfFolder + " создана\n");
+        } else logger.append("Директорию " + pathOfFolder + " создать не получилось\n");
     }
 
-    public static void createFile(String path, StringBuilder stringBuilder) {
-        File file = new File(path);
+    public static void createFile(String pathOfFile, StringBuilder logger) {
+        File file = new File(pathOfFile);
         try {
             if (file.createNewFile())
-                stringBuilder.append("Файл " + path + " создан\n");
-            else stringBuilder.append("Файл " + path + " создать не получилось\n");
+                logger.append("Файл " + pathOfFile + " создан\n");
+            else logger.append("Файл " + pathOfFile + " создать не получилось\n");
         } catch (IOException ex) {
-            stringBuilder.append(ex.getMessage());
+            logger.append(ex.getMessage());
             System.out.println(ex.getMessage());
         }
     }
 
-    public static void writeInfoToFile(String info, String path) {
-        try (FileWriter writer = new FileWriter(new File(path), false)) {
+    public static void writeInfoToFile(String info, String pathOfFile) {
+        try (FileWriter writer = new FileWriter(new File(pathOfFile), false)) {
             writer.write(info);
             writer.flush();
         } catch (IOException ex) {
